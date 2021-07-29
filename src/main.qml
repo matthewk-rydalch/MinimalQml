@@ -20,8 +20,8 @@ Rectangle {
         }
 
         transitions: Transition {
-            from: ""; to: "down"; reversible: true
-            ParallelAnimation {
+            from: ""; to: "down"; reversible: true //Specifies between what states the transition happens.  Also states that it is reversible (same as duplicating the opposite of this code.)
+            ParallelAnimation { //Allows both animations to happen at the same time.
                 NumberAnimation { properties: "y,rotation"; duration: 500; easing.type: Easing.InOutQuad }
                 ColorAnimation { duration: 500 }
             }
