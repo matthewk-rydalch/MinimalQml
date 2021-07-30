@@ -46,7 +46,7 @@ Rectangle { //This is an object of type Rectangle.
         x: 4; anchors.bottom: page.bottom; anchors.bottomMargin: 4
         rows: 2; columns: 3; spacing: 3
 
-        Cell { cellColor: "red"; onClicked: helloText.color = cellColor }
+        Cell { cellColor: "red"; onClicked: seq.cppMethod() }
         Cell { cellColor: "green"; onClicked: helloText.color = cellColor }
         Cell { cellColor: "blue"; onClicked: helloText.color = cellColor }
         Cell { cellColor: "yellow"; onClicked: helloText.color = cellColor }
