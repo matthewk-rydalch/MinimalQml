@@ -3,16 +3,15 @@
 #include <QQmlContext>
 #include <iostream>
 
-#include "sequence.h"
+#include "adder.h"
 
 int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
     QQuickView view;
 
-    Sequence sequence;
-    std::cout << "check: " << sequence.check << std::endl;
-    view.rootContext()->setContextProperty("seq", &sequence); // the object will be available in QML with name "sequence"
+    Adder adderObject;
+    view.rootContext()->setContextProperty("adder", &adderObject); // the object will be available in QML with name "adder"
 
     view.setSource(QUrl::fromLocalFile("/home/matt/sandbox/qml_sandbox/src/main.qml"));
     view.show();
