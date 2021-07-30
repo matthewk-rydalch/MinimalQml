@@ -7,7 +7,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 
-set(PROJECT "hello_world")
+set(PROJECT "display_data")
 
 project(${PROJECT})
 

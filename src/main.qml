@@ -1,43 +1,41 @@
 import QtQuick 2.0
 
+//model, view, and delegate to display a group of data
+
 Rectangle {
-    id: page
-    width: 320; height: 480
-    color: "lightgray"
+     width: 200; height: 200
 
-    Text {
-        id: helloText
-        text: "Hello world!"
-        y: 30
-        anchors.horizontalCenter: page.horizontalCenter
-        font.pointSize: 24; font.bold: true
-
-        MouseArea { id: mouseArea; anchors.fill: parent }
-
-        states: State {
-            name: "down"; when: mouseArea.pressed == true
-            PropertyChanges { target: helloText; y: 160; rotation: 180; color: "red" }
+    ListModel { //Model: contains the data and its structure.  Several QML types for creating models.
+        id: fruitModel
+        property string language: "en"
+        ListElement {
+            name: "Apple"
+            cost: 2.45
         }
-
-        transitions: Transition {
-            from: ""; to: "down"; reversible: true //Specifies between what states the transition happens.  Also states that it is reversible (same as duplicating the opposite of this code.)
-            ParallelAnimation { //Allows both animations to happen at the same time.
-                NumberAnimation { properties: "y,rotation"; duration: 500; easing.type: Easing.InOutQuad }
-                ColorAnimation { duration: 500 }
-            }
+        ListElement {
+            name: "Orange"
+            cost: 3.25
+        }
+        ListElement {
+            name: "Banana"
+            cost: 1.95
         }
     }
 
-    Grid {
-        id: colorPicker
-        x: 4; anchors.bottom: page.bottom; anchors.bottomMargin: 4
-        rows: 2; columns: 3; spacing: 3
+    Component { //Delegate: dictates how the data should appear in the view.
+        id: fruitDelegate
+        Row {
+                id: fruit
+                Text { text: " Fruit: " + name; color: fruit.ListView.view.fruit_color }
+                Text { text: " Cost: $" + cost }
+                Text { text: " Language: " + fruit.ListView.view.model.language }
+        }
+    }
 
-        Cell { cellColor: "red"; onClicked: helloText.color = cellColor }
-        Cell { cellColor: "green"; onClicked: helloText.color = cellColor }
-        Cell { cellColor: "blue"; onClicked: helloText.color = cellColor }
-        Cell { cellColor: "yellow"; onClicked: helloText.color = cellColor }
-        Cell { cellColor: "steelblue"; onClicked: helloText.color = cellColor }
-        Cell { cellColor: "black"; onClicked: helloText.color = cellColor }
+    ListView { //View: A container that displays the data.  The view might be a list or a grid
+        property color fruit_color: "green"
+        model: fruitModel
+        delegate: fruitDelegate
+        anchors.fill: parent
     }
 }
