@@ -23,7 +23,7 @@ Rectangle { //This is an object of type Rectangle.
             }
         }
 
-        onYChanged: console.log("y has changed to:", y)  //console.log is a print statement in qml 
+        onYChanged: { console.log("y has changed to:", y); seq.check = false; console.log("check: ", seq.check) }  //console.log is a print statement in qml 
         //property changed signals are emitted and can be accessed by onPropertyChanged
         // on prefaces any signal handler.
 
@@ -57,5 +57,9 @@ Rectangle { //This is an object of type Rectangle.
     Connections {
         target: seq
         onCpp_called: console.log("cpp called")
+    }
+    Connections {
+        target: seq
+        onCheckChanged: console.log("check changed")
     }
 }
