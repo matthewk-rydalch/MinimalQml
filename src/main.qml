@@ -17,7 +17,7 @@ Rectangle { //This is an object of type Rectangle.
             id: mouseArea
             acceptedButtons: Qt.LeftButton | Qt.RightButton
             anchors.fill: parent
-            onPressed: {
+            onPressed: { //Some signal handlers have optional parameters as in here.
                 if (mouse.button == Qt.RightButton)
                     console.log("Right mouse button pressed")
             }
