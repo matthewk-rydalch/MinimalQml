@@ -46,12 +46,12 @@ Rectangle { //This is an object of type Rectangle.
         x: 4; anchors.bottom: page.bottom; anchors.bottomMargin: 4
         rows: 2; columns: 3; spacing: 3
 
-        Cell { cellColor: "red"; onClicked: seq.cppMethod() }
-        Cell { cellColor: "green"; onClicked: helloText.color = cellColor }
-        Cell { cellColor: "blue"; onClicked: helloText.color = cellColor }
-        Cell { cellColor: "yellow"; onClicked: helloText.color = cellColor }
-        Cell { cellColor: "steelblue"; onClicked: helloText.color = cellColor }
-        Cell { cellColor: "black"; onClicked: helloText.color = cellColor }
+        Cell { cellColor: "red"; onClicked: { helloText.color = cellColor; seq.add_to_sum(1) } }
+        Cell { cellColor: "green"; onClicked: { helloText.color = cellColor; seq.add_to_sum(2) } }
+        Cell { cellColor: "blue"; onClicked: { helloText.color = cellColor; seq.add_to_sum(3) } }
+        Cell { cellColor: "black"; onClicked: { helloText.color = cellColor; console.log("overflowValue = ", seq.overflowValue) } } //read overflowValue
+        Cell { cellColor: "black"; onClicked: { helloText.color = cellColor; seq.overflowValue = seq.overflowValue + 1 } } //add 1 to overflowValue
+        Cell { cellColor: "black"; onClicked: { helloText.color = cellColor; seq.overflowValue = seq.overflowValue - 1 } } //subtract 1 to overflowValue
     }
 
     Connections {
@@ -61,5 +61,9 @@ Rectangle { //This is an object of type Rectangle.
     Connections {
         target: seq
         onCheckChanged: console.log("check changed")
+    }
+    Connections {
+        target: seq
+        onOverflow: console.log("overflow")
     }
 }
