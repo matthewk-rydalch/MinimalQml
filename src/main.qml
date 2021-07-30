@@ -1,8 +1,9 @@
 import QtQuick 2.0
+//imports standard QML Elements
 
-Rectangle {
-    id: page
-    width: 320; height: 480
+Rectangle { //This is an object of type Rectangle.
+    id: page //The object is given an id page
+    width: 320; height: 480 //Properties are set by property: value // they can be inline with a ;
     color: "lightgray"
 
     Text {
@@ -12,7 +13,19 @@ Rectangle {
         anchors.horizontalCenter: page.horizontalCenter
         font.pointSize: 24; font.bold: true
 
-        MouseArea { id: mouseArea; anchors.fill: parent }
+        MouseArea { 
+            id: mouseArea
+            acceptedButtons: Qt.LeftButton | Qt.RightButton
+            anchors.fill: parent
+            onPressed: {
+                if (mouse.button == Qt.RightButton)
+                    console.log("Right mouse button pressed")
+            }
+        }
+
+        onYChanged: console.log("y has changed to:", y)  //console.log is a print statement in qml 
+        //property changed signals are emitted and can be accessed by onPropertyChanged
+        // on prefaces any signal handler.
 
         states: State {
             name: "down"; when: mouseArea.pressed == true
