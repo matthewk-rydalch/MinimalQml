@@ -15,7 +15,13 @@ public slots:
     void cppMethod()
     {
         qDebug("C++ method called!");
+        cpp_called();
     }
+signals:
+    void cpp_called();
+
+private:
+    bool changed;
 };
 
 #endif // SEQUENCE_H

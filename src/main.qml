@@ -53,4 +53,9 @@ Rectangle { //This is an object of type Rectangle.
         Cell { cellColor: "steelblue"; onClicked: helloText.color = cellColor }
         Cell { cellColor: "black"; onClicked: helloText.color = cellColor }
     }
+
+    Connections {
+        target: seq
+        onCpp_called: console.log("cpp called")
+    }
 }
