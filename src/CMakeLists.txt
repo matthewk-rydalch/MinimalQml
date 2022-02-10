@@ -10,7 +10,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 
-set(PROJECT "MinimalQml")
+set(PROJECT "TableView")
 
 project(${PROJECT})
 
