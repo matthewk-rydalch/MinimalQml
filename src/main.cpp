@@ -1,13 +1,12 @@
 #include <QApplication>
-#include <QQmlApplicationEngine>
+#include <QQuickView>
 
 int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
+    QQuickView view;
 
-    QQmlApplicationEngine engine;
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    view.setSource(QUrl::fromLocalFile("/home/matt/Projects/sandbox/qml_sandbox/src/main.qml"));
 
     return app.exec();
 }
-
