@@ -27,6 +27,10 @@ Item
         TableView 
         {
             anchors.fill: parent
+            sortIndicatorVisible: true
+            sortIndicatorColumn: 1
+            sortIndicatorOrder: Qt.AscendingOrder
+            alternatingRowColors: true
             TableViewColumn
             {
                 role: "column1"
@@ -40,6 +44,10 @@ Item
                 width: 100
             }
             model: myModel
+            onSortIndicatorOrderChanged:
+            {
+                console.log("order changed")
+            }
         }
     }
 }
