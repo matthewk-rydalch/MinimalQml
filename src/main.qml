@@ -4,6 +4,8 @@ import QtQuick.Controls 1.0
 Item
 {
     id: ui
+    width: 640
+    height: 150
     ListModel
     {
         id: myModel
@@ -22,31 +24,57 @@ Item
     Rectangle
     {
         visible: true
-        width: 640
-        height: 480
-        TableView 
+        anchors.fill: parent
+        Rectangle
         {
-            anchors.fill: parent
-            sortIndicatorVisible: true
-            sortIndicatorColumn: 1
-            sortIndicatorOrder: Qt.AscendingOrder
-            alternatingRowColors: true
-            TableViewColumn
-            {
-                role: "column1"
-                title: "odds"
-                width: 100
+            id: clicker
+            visible: true
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            width: 40
+            MouseArea
+                {
+                anchors.fill: parent
+                onClicked:
+                {
+                    console.log("clicked")
+                    myModel.append({"column1": "blah", "column2": "duh"})
+                }
             }
-            TableViewColumn
+        }
+        Rectangle
+        {
+            id: myTable
+            visible: true
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.left: clicker.right
+            anchors.right: parent.right
+            TableView 
             {
-                role: "column2"
-                title: "evens"
-                width: 100
-            }
-            model: myModel
-            onSortIndicatorOrderChanged:
-            {
-                console.log("order changed")
+                anchors.fill: parent
+                sortIndicatorVisible: true
+                sortIndicatorColumn: 1
+                sortIndicatorOrder: Qt.AscendingOrder
+                alternatingRowColors: true
+                TableViewColumn
+                {
+                    role: "column1"
+                    title: "odds"
+                    width: 320
+                }
+                TableViewColumn
+                {
+                    role: "column2"
+                    title: "evens"
+                    width: 320
+                }
+                model: myModel
+                onSortIndicatorOrderChanged:
+                {
+                    console.log("order changed")
+                }
             }
         }
     }
