@@ -11,8 +11,8 @@ Item
         id: myModel
         ListElement
         {
-            column1: "value 1"
-            column2: "value 2"
+            source: "N/A"
+            index: 0
         }
     }
 
@@ -33,8 +33,7 @@ Item
                 anchors.fill: parent
                 onClicked:
                 {
-                    console.log("clicked")
-                    myModel.append({"column1": "clicker1", "column2": "clicker2"})
+                    myModel.append({"source": "clicker", "index": "N/A"})
                 }
             }
         }
@@ -55,14 +54,14 @@ Item
                 alternatingRowColors: true
                 TableViewColumn
                 {
-                    role: "column1"
-                    title: "odds"
+                    role: "source"
+                    title: "source"
                     width: 320
                 }
                 TableViewColumn
                 {
-                    role: "column2"
-                    title: "evens"
+                    role: "index"
+                    title: "index"
                     width: 320
                 }
                 model: myModel
@@ -89,7 +88,12 @@ Item
         target: tableView
         onAddFieldInQml:
         {
-            myModel.append({"column1": "timer1", "column2": "timer2"})  
+            myModel.append({"source": "timer", "index": index})  
+        }
+        onShakeThingsUp:
+        {
+            myModel.remove(1)
+            myModel.insert(indexPlusSome, {"source": "shake up", "index": -1})
         }
     }
 }
