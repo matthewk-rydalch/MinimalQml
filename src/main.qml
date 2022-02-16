@@ -14,11 +14,6 @@ Item
             column1: "value 1"
             column2: "value 2"
         }
-        ListElement
-        {
-            column1: "value 3"
-            column2: "value 4"
-        }
     }
 
     Rectangle
@@ -39,7 +34,7 @@ Item
                 onClicked:
                 {
                     console.log("clicked")
-                    myModel.append({"column1": "blah", "column2": "duh"})
+                    myModel.append({"column1": "clicker1", "column2": "clicker2"})
                 }
             }
         }
@@ -76,6 +71,25 @@ Item
                     console.log("order changed")
                 }
             }
+        }
+    }
+    Item
+    {
+        Timer
+        {
+            interval: 1000; running: true; repeat: true
+            onTriggered: 
+            {
+                tableView.add_field_to_table_from_cpp();
+            }
+        }
+    }
+    Connections
+    {
+        target: tableView
+        onAddFieldInQml:
+        {
+            myModel.append({"column1": "timer1", "column2": "timer2"})  
         }
     }
 }
